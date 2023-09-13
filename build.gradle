@@ -1,0 +1,149 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.beryx.jlink' version '2.25.0'
+    //ym yes
+    //id 'org.bytedeco.gradle-javacpp-platform' version '1.5.8'
+}
+
+group 'dev.bebomny'
+version '0.0.1'
+
+repositories {
+    mavenCentral()
+
+    //maven {
+    //    url "https://github.com/gaeqs/JavaYoutubeDownloader"
+    //}
+}
+
+ext {
+    junitVersion = '5.9.2'
+    //ym yes
+    //javacppPlatform = 'windows-x86_64'
+}
+
+sourceCompatibility = '18'
+targetCompatibility = '18'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+application {
+    mainModule = 'dev.bebomny.youtubevideodownloader'
+    mainClass = 'dev.bebomny.youtubevideodownloader.YoutubeVideoDownloaderApplication'
+}
+
+javafx {
+    version = '18.0.2'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+    implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
+    implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
+    //implementation 'io.github.gaeqs:JavaYoutubeDownloader:1.2.3'
+    //implementation("org.openjdk.nashorn:nashorn-core:15.4")
+
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.79'
+
+    implementation group: 'org.bytedeco', name: 'javacv', version: '1.5.8'
+    implementation group: 'org.bytedeco', name: 'javacv-platform', version: '1.5.8'
+    implementation group: 'org.bytedeco', name: 'ffmpeg-platform', version: '5.1.2-1.5.8'
+    //implementation group: 'org.bytedeco', name: 'ffmpeg-platform-gpl', version: '5.1.2-1.5.8'
+
+    /*implementation(group: 'org.bytedeco', name: 'javacv-platform', version: '1.5.8') {
+        exclude group: 'org.bytedeco', module: 'opencv'
+        exclude group: 'org.bytedeco', module: 'openblas'
+        exclude group: 'org.bytedeco', module: 'flycapture'
+        exclude group: 'org.bytedeco', module: 'libdc1394'
+        exclude group: 'org.bytedeco', module: 'libfreenect'
+        exclude group: 'org.bytedeco', module: 'libfreenect2'
+        exclude group: 'org.bytedeco', module: 'librealsense'
+        exclude group: 'org.bytedeco', module: 'librealsense2'
+        exclude group: 'org.bytedeco', module: 'videoinput'
+        exclude group: 'org.bytedeco', module: 'artoolkitplus'
+        exclude group: 'org.bytedeco', module: 'flandmark'
+        exclude group: 'org.bytedeco', module: 'leptonica'
+        exclude group: 'org.bytedeco', module: 'tesseract'
+    }*/
+
+    /*implementation(group: 'org.bytedeco', name: 'javacv', version: '1.5.9') {
+        exclude group: 'org.bytedeco', module: 'opencv'
+        exclude group: 'org.bytedeco', module: 'openblas'
+        exclude group: 'org.bytedeco', module: 'flycapture'
+        exclude group: 'org.bytedeco', module: 'libdc1394'
+        exclude group: 'org.bytedeco', module: 'libfreenect'
+        exclude group: 'org.bytedeco', module: 'libfreenect2'
+        exclude group: 'org.bytedeco', module: 'librealsense'
+        exclude group: 'org.bytedeco', module: 'librealsense2'
+        exclude group: 'org.bytedeco', module: 'videoinput'
+        exclude group: 'org.bytedeco', module: 'artoolkitplus'
+        exclude group: 'org.bytedeco', module: 'flandmark'
+        exclude group: 'org.bytedeco', module: 'leptonica'
+        //exclude group: 'org.bytedeco', module: 'tesseract'
+    }
+    implementation(group: 'org.bytedeco', name: 'javacv-platform', version: '1.5.9') {
+        //exclude group: 'org.bytedeco', module: 'opencv'
+        //exclude group: 'org.bytedeco', module: 'openblas'
+        //exclude group: 'org.bytedeco', module: 'flycapture'
+        //exclude group: 'org.bytedeco', module: 'libdc1394'
+        //exclude group: 'org.bytedeco', module: 'libfreenect'
+        //exclude group: 'org.bytedeco', module: 'libfreenect2'
+        //exclude group: 'org.bytedeco', module: 'librealsense'
+        //exclude group: 'org.bytedeco', module: 'librealsense2'
+        //exclude group: 'org.bytedeco', module: 'videoinput'
+        //exclude group: 'org.bytedeco', module: 'artoolkitplus'
+        //exclude group: 'org.bytedeco', module: 'flandmark'
+        //exclude group: 'org.bytedeco', module: 'leptonica'
+        //exclude group: 'org.bytedeco', module: 'tesseract'
+    }
+    //implementation(group: 'org.bytedeco', name: 'javacv', version: '1.5.9')
+    //implementation(group: 'org.bytedeco', name: 'javacv-platform', version: '1.5.9')
+
+    implementation(group: 'org.bytedeco', name: 'javacpp', version: '1.5.9')
+    implementation(group: 'org.bytedeco', name: 'javacpp-platform', version: '1.5.9')
+    implementation(group: 'org.bytedeco', name: 'ffmpeg', version: '6.0-1.5.9')
+    implementation(group: 'org.bytedeco', name: 'ffmpeg-platform', version: '6.0-1.5.9')
+    implementation(group: 'org.bytedeco', name: 'flandmark-platform', version: '1.07-1.5.8')*/
+
+    //implementation(group: 'org.bytedeco', name: 'flandmark-platform', )
+
+    /*runtimeOnly "org.bytedeco:ffmpeg:6.0-1.5.9:macosx-x86_64"
+    runtimeOnly "org.bytedeco:ffmpeg:6.0-1.5.9:linux-x86_64"
+    runtimeOnly "org.bytedeco:ffmpeg:6.0-1.5.9}:windows-x86_64"
+    runtimeOnly "org.bytedeco:ffmpeg:6.0-1.5.9:macosx-arm64"
+    runtimeOnly "org.bytedeco:ffmpeg:6.0-1.5.9:linux-arm64"*/
+
+    /*
+    implementation group: 'org.bytedeco', name: 'javacv', version: '1.5.9'
+    implementation group: 'org.bytedeco', name: 'javacv-platform', version: '1.5.9'
+    //implementation 'org.bytedeco:ffmpeg:6.0-1.5.9'
+    implementation group: 'org.bytedeco', name: 'javacpp', version: '1.5.9'
+    implementation group: 'org.bytedeco', name: 'javacpp-platform', version: '1.5.9'
+    implementation group: 'org.bytedeco', name: 'javacpp-presets', version: '1.5.9'
+    implementation group: 'org.bytedeco', name: 'javacpp-presets-platform', version: '1.5.9'
+    implementation group: 'org.bytedeco', name: 'flandmark-platform', version: '1.07-1.5.8'
+     */
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jlink {
+    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'app'
+    }
+}
+
+jlinkZip {
+    group = 'distribution'
+}

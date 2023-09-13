@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.bebomny.youtubevideodownloader.MainController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="400.0">
+            <center>
+                <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                            <children>
+                                <Label text="URL:" />
+                                <Label text="Destination:" />
+                            </children>
+                            <padding>
+                                <Insets right="10.0" />
+                            </padding>
+                        </VBox>
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <VBox alignment="BOTTOM_CENTER" prefHeight="136.0" prefWidth="200.0" spacing="5.0">
+                                    <children>
+                                        <Label fx:id="statusLabel" text="Status">
+                                            <VBox.margin>
+                                                <Insets bottom="16.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                        <TextField fx:id="URLTextField" />
+                                        <TextField fx:id="directoryTextField" />
+                                    </children>
+                                </VBox>
+                                <Button mnemonicParsing="false" onAction="#onDownloadButtonClick" prefWidth="110.0" text="Download">
+                                    <VBox.margin>
+                                        <Insets bottom="33.0" top="15.0" />
+                                    </VBox.margin></Button>
+                            </children></VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="136.0" prefWidth="100.0">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#onSelectButtonClick" text="Select" />
+                            </children>
+                            <HBox.margin>
+                                <Insets bottom="73.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets left="6.0" />
+                            </padding></VBox>
+                    </children>
+                </HBox>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
