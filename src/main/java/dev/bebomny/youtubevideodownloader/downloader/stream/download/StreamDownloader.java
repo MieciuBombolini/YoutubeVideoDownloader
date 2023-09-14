@@ -194,8 +194,6 @@ public class StreamDownloader implements Runnable{
         //Conversion
         status = DownloadStatus.CONVERTING;
 
-        //String ffmpegCommand =
-
         //save to target//javaCV approach
         try (FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(mergedVideo);
              FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(target, option.getWidth(), option.getHeight());) {

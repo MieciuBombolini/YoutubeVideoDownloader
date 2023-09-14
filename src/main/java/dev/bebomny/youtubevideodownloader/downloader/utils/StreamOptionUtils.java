@@ -9,11 +9,13 @@ import java.util.Objects;
 public class StreamOptionUtils {
 
     public static List<StreamOption> extractVideoOptions(List<StreamOption> allOptions) {
+        allOptions.removeIf(Objects::isNull);
         allOptions.removeIf(option -> !option.getType().hasVideo());
         return allOptions;
     }
 
     public static List<StreamOption> extractAudioOptions(List<StreamOption> allOptions) {
+        allOptions.removeIf(Objects::isNull);
         allOptions.removeIf(option -> !option.getType().hasAudio() || option.getType().hasVideo());
         return allOptions;
     }
