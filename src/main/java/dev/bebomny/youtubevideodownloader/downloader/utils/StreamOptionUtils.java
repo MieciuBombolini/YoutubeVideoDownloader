@@ -1,6 +1,6 @@
 package dev.bebomny.youtubevideodownloader.downloader.utils;
 
-import dev.bebomny.youtubevideodownloader.downloader.stream.StreamOption;
+import dev.bebomny.youtubevideodownloader.download.StreamOption;
 
 import java.util.Comparator;
 import java.util.List;

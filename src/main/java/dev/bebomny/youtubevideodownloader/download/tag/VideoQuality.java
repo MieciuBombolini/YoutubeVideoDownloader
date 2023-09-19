@@ -1,4 +1,4 @@
-package dev.bebomny.youtubevideodownloader.downloader.tag;
+package dev.bebomny.youtubevideodownloader.download.tag;
 
 /**
  * Represents the video quality of a video channel.
@@ -7,7 +7,7 @@ public enum VideoQuality {
 
     p3072("3072p", 0, 3072), //unknown TODO
     p2304("2304p", 0, 2304), //unknown TODO
-    p2160("2160p", 4096, 2160), //unknown TODO
+    p2160("2160p", 4096, 2160),
     p1440("1440p", 2560, 1440),
     p1080("1080p", 1920, 1080),
     p720("720p", 1280, 720),

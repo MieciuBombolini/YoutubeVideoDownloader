@@ -4,21 +4,12 @@ import dev.bebomny.youtubevideodownloader.DataManager;
 import dev.bebomny.youtubevideodownloader.DownloadManager;
 import dev.bebomny.youtubevideodownloader.MainController;
 import dev.bebomny.youtubevideodownloader.YoutubeVideoDownloaderApplication;
-import dev.bebomny.youtubevideodownloader.downloader.stream.StreamOption;
 import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
-import dev.bebomny.youtubevideodownloader.downloader.utils.FileNameSanitizer;
 import javafx.animation.AnimationTimer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
 public class FetchingAnimation extends AnimationTimer {
 

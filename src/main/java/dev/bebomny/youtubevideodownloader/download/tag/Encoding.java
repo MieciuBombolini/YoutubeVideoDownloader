@@ -1,4 +1,4 @@
-package dev.bebomny.youtubevideodownloader.downloader.tag;
+package dev.bebomny.youtubevideodownloader.download.tag;
 
 /**
  * Represents the encoding of a video or audio channel.

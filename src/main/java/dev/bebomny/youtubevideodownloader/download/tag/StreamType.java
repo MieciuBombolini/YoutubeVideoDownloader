@@ -1,4 +1,4 @@
-package dev.bebomny.youtubevideodownloader.downloader.tag;
+package dev.bebomny.youtubevideodownloader.download.tag;
 
 
 
@@ -21,7 +21,7 @@ public class StreamType {
         this.audioEncoding = audioEncoding;
         this.audioQuality = audioQuality;
         this.formatNote = formatNote;
-        this.fps = FPS.f30;
+        this.fps = FPS.f25;
     }
 
     public StreamType(Container container, Encoding videoEncoding, VideoQuality videoQuality, FormatNote formatNote) {
@@ -31,7 +31,7 @@ public class StreamType {
         this.audioEncoding = null;
         this.audioQuality = null;
         this.formatNote = formatNote;
-        this.fps = FPS.f30;
+        this.fps = FPS.f25;
     }
 
 
@@ -42,7 +42,7 @@ public class StreamType {
         this.videoEncoding = null;
         this.videoQuality = null;
         this.formatNote = formatNote;
-        this.fps = FPS.f30;
+        this.fps = FPS.f25;
     }
 
     public StreamType(Container container, Encoding videoEncoding, VideoQuality videoQuality, Encoding audioEncoding, AudioQuality audioQuality, FormatNote formatNote, FPS fps) {

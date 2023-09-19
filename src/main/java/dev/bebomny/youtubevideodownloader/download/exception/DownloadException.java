@@ -1,4 +1,4 @@
-package dev.bebomny.youtubevideodownloader.downloader.exception;
+package dev.bebomny.youtubevideodownloader.download.exception;
 
 public class DownloadException extends RuntimeException {
 

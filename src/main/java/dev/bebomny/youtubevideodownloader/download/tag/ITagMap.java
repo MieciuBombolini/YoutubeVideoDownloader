@@ -1,4 +1,4 @@
-package dev.bebomny.youtubevideodownloader.downloader.tag;
+package dev.bebomny.youtubevideodownloader.download.tag;
 
 
 import java.util.HashMap;
@@ -56,8 +56,8 @@ public class ITagMap extends HashMap<Integer, StreamType> {
         put(160, new StreamType(Container.MP4, Encoding.H264, VideoQuality.p144, FormatNote.DASH));
         put(212, new StreamType(Container.MP4, Encoding.H264, VideoQuality.p480, FormatNote.DASH));
         put(264, new StreamType(Container.MP4, Encoding.H264, VideoQuality.p1440, FormatNote.DASH));
-        put(298, new StreamType(Container.MP4, Encoding.H264, VideoQuality.p720, FormatNote.DASH, FPS.f60));
-        put(299, new StreamType(Container.MP4, Encoding.H264, VideoQuality.p1080, FormatNote.DASH, FPS.f60));
+        put(298, new StreamType(Container.MP4, Encoding.H264, VideoQuality.p720, FormatNote.DASH, FPS.f50));
+        put(299, new StreamType(Container.MP4, Encoding.H264, VideoQuality.p1080, FormatNote.DASH, FPS.f50));
         put(266, new StreamType(Container.MP4, Encoding.H264, VideoQuality.p2160, FormatNote.DASH));
 
         //Dash mp4 audio
@@ -86,11 +86,11 @@ public class ITagMap extends HashMap<Integer, StreamType> {
         put(248, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p1080, FormatNote.DASH));
         put(271, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p1440, FormatNote.DASH));
         put(272, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p2160, FormatNote.DASH));
-        put(302, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p720, FormatNote.DASH, FPS.f60));
-        put(303, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p1080, FormatNote.DASH, FPS.f60));
-        put(308, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p1440, FormatNote.DASH, FPS.f60));
+        put(302, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p720, FormatNote.DASH, FPS.f50));
+        put(303, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p1080, FormatNote.DASH, FPS.f50));
+        put(308, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p1440, FormatNote.DASH, FPS.f50));
         put(313, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p2160, FormatNote.DASH));
-        put(315, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p2160, FormatNote.DASH, FPS.f60));
+        put(315, new StreamType(Container.WEBM, Encoding.VP9, VideoQuality.p2160, FormatNote.DASH, FPS.f50));
 
         //Dash webm audio
         put(171, new StreamType(Container.WEBM, Encoding.VORBIS, AudioQuality.k128, FormatNote.DASH));

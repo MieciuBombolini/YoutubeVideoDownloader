@@ -1,8 +1,8 @@
 package dev.bebomny.youtubevideodownloader.downloader.stream.download;
 
-import dev.bebomny.youtubevideodownloader.downloader.exception.DownloadException;
-import dev.bebomny.youtubevideodownloader.downloader.stream.StreamOption;
-import dev.bebomny.youtubevideodownloader.downloader.tag.FormatNote;
+import dev.bebomny.youtubevideodownloader.download.exception.DownloadException;
+import dev.bebomny.youtubevideodownloader.download.StreamOption;
+import dev.bebomny.youtubevideodownloader.download.tag.FormatNote;
 import dev.bebomny.youtubevideodownloader.downloader.utils.ConnectionUtils;
 
 import org.bytedeco.ffmpeg.global.avcodec;

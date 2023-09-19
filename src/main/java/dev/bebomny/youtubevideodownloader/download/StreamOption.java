@@ -1,7 +1,6 @@
-package dev.bebomny.youtubevideodownloader.downloader.stream;
+package dev.bebomny.youtubevideodownloader.download;
 
-import com.alibaba.fastjson.JSONObject;
-import dev.bebomny.youtubevideodownloader.downloader.tag.StreamType;
+import dev.bebomny.youtubevideodownloader.download.tag.StreamType;
 import dev.bebomny.youtubevideodownloader.downloader.utils.Validate;
 
 import java.net.URL;

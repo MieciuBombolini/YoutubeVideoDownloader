@@ -3,14 +3,12 @@ package dev.bebomny.youtubevideodownloader;
 import dev.bebomny.youtubevideodownloader.animation.DownloadAnimation;
 import dev.bebomny.youtubevideodownloader.animation.FetchingAnimation;
 import dev.bebomny.youtubevideodownloader.downloader.YoutubeDownloader;
-import dev.bebomny.youtubevideodownloader.downloader.stream.StreamOption;
+import dev.bebomny.youtubevideodownloader.download.StreamOption;
 import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
 import dev.bebomny.youtubevideodownloader.downloader.stream.download.StreamDownloader;
-import javafx.scene.image.Image;
 
 import java.io.File;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
 
 public class DownloadManager {
 

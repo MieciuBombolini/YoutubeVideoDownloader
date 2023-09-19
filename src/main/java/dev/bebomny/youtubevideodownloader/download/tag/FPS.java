@@ -1,4 +1,4 @@
-package dev.bebomny.youtubevideodownloader.downloader.tag;
+package dev.bebomny.youtubevideodownloader.download.tag;
 
 /**
  * Returns the frames per second of a video stream.

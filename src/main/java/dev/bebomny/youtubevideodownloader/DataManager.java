@@ -1,6 +1,6 @@
 package dev.bebomny.youtubevideodownloader;
 
-import dev.bebomny.youtubevideodownloader.downloader.stream.StreamOption;
+import dev.bebomny.youtubevideodownloader.download.StreamOption;
 import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
 import javafx.scene.image.Image;
 

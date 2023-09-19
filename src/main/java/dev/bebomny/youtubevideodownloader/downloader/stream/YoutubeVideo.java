@@ -1,6 +1,7 @@
 package dev.bebomny.youtubevideodownloader.downloader.stream;
 
 import com.alibaba.fastjson.JSONObject;
+import dev.bebomny.youtubevideodownloader.download.StreamOption;
 import dev.bebomny.youtubevideodownloader.downloader.utils.StreamOptionUtils;
 import dev.bebomny.youtubevideodownloader.downloader.utils.Validate;
 
