@@ -1,4 +1,4 @@
-package dev.bebomny.youtubevideodownloader.downloader.utils;
+package dev.bebomny.youtubevideodownloader.utils;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -16,7 +16,7 @@ public class ConnectionUtils {
     private static final String QUERY_SPACER = "&";
     private static final String QUERY_EQUALS = "=";
 
-    public static String getJsonResponse(String videoId) {
+    public static String getJsonResponse(String requestBody) {
         try {
             URL url = new URL(YOUTUBE_URL + YOUTUBE_PLAYER);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -24,8 +24,6 @@ public class ConnectionUtils {
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Connection", "keep-alive");
             connection.setDoOutput(true);
-
-            String requestBody = getRequestBodyForVideoId(videoId);
 
             try (OutputStream outputStream = connection.getOutputStream()) {
                 byte[] input = requestBody.getBytes(StandardCharsets.UTF_8);
@@ -77,9 +75,5 @@ public class ConnectionUtils {
     public static String updateUrlQuery(String url, String key, String value) {
         String newParameter = QUERY_SPACER + key + QUERY_EQUALS + value;
         return url + newParameter;
-    }
-
-    public static String getRequestBodyForVideoId(String videoId) {
-        return "{\"context\": {\"client\": {\"clientName\": \"ANDROID\", \"clientVersion\": \"17.31.35\", \"androidSdkVersion\": 30 }}, \"videoId\": \"" + videoId +"\", \"params\": \"CgIQBg==\", \"playbackContext\": {\"contentPlaybackContext\": {\"html5Preference\": \"HTML5_PREF_WANTS\"}}, \"contentCheckOk\": true, \"racyCheckOk\": true}";
     }
 }

@@ -11,6 +11,7 @@ public class FetchException extends RuntimeException{
     }
 
     public enum Stage {
+        PREPARING,
         CONNECTION,
         EXTRACTION,
         FORMAT_PARSING

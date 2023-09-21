@@ -4,7 +4,6 @@ import dev.bebomny.youtubevideodownloader.DataManager;
 import dev.bebomny.youtubevideodownloader.DownloadManager;
 import dev.bebomny.youtubevideodownloader.MainController;
 import dev.bebomny.youtubevideodownloader.YoutubeVideoDownloaderApplication;
-import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
 import javafx.animation.AnimationTimer;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;

@@ -8,7 +8,7 @@ import java.util.Objects;
 public class AudioStreamOption implements StreamOption{
 
     private final URL url;
-    private final  StreamType streamType;
+    private final StreamType streamType;
     private final Quality quality;
     private final int iTag;
     private final int approxDurationMs;
@@ -17,14 +17,18 @@ public class AudioStreamOption implements StreamOption{
     private final int audioSampleRate;
     private final int audioChannels;
 
-    public AudioStreamOption(URL url, StreamType streamType, String audioQualityKey, int iTag, int approxDurationMs, int contentLength, int bitrate, int audioSampleRate, int audioChannels) {
+    public AudioStreamOption(URL url, StreamType streamType, String audioQualityKey,
+                             int iTag, int approxDurationMs, int contentLength, int bitrate,
+                             int audioSampleRate, int audioChannels) {
         this.url = url;
         this.streamType = streamType;
-        this.quality = AudioQuality.getByKey(audioQualityKey);
+        this.quality = AudioOptionQuality.getByKey(audioQualityKey);
         this.iTag = iTag;
         this.approxDurationMs = approxDurationMs;
         this.contentLength = contentLength;
         this.bitrate = bitrate;
+
+        //Audio specific
         this.audioSampleRate = audioSampleRate;
         this.audioChannels = audioChannels;
     }
@@ -40,13 +44,13 @@ public class AudioStreamOption implements StreamOption{
     }
 
     @Override
-    public String getQualityText() {
+    public String getAudioQualityText() {
         return quality.getText();
     }
 
     @Override
-    public String getQualityKey() {
-        return null;
+    public String getAudioQualityKey() {
+        return quality.getKey();
     }
 
     @Override
@@ -70,27 +74,35 @@ public class AudioStreamOption implements StreamOption{
     }
 
     @Override
-    public Quality getQuality() {
+    public Quality getAudioQuality() {
         return quality;
     }
 
+    @Override
     public int getAudioSampleRate() {
         return audioSampleRate;
     }
 
+    @Override
     public int getAudioChannels() {
         return audioChannels;
     }
 
-    private enum AudioQuality implements Quality {
+    @Override
+    public boolean isAudio() {
+        return true;
+    }
+
+    public enum AudioOptionQuality implements Quality {
         LOW("AUDIO_QUALITY_LOW", "Low"),
         MEDIUM("AUDIO_QUALITY_MEDIUM", "Medium"),
-        HIGH("AUDIO_QUALITY_HIGH", "High");
+        HIGH("AUDIO_QUALITY_HIGH", "High"),
+        UNKNOWN("unknown", "Unknown");
 
         private final String key;
         private final String text;
 
-        AudioQuality(String key, String text) {
+        AudioOptionQuality(String key, String text) {
             this.key = key;
             this.text = text;
         }
@@ -102,19 +114,22 @@ public class AudioStreamOption implements StreamOption{
 
         @Override
         public String getText() {
+            if(this == UNKNOWN) {
+                return "AudioQuality Unknown, Report if you can, ty:)";
+            }
             return text;
         }
 
-        static AudioQuality getByKey(String key) {
+        static AudioOptionQuality getByKey(String key) {
             if (key == null)
-                return AudioQuality.LOW;
+                return AudioOptionQuality.LOW;
 
-            for (AudioQuality quality : AudioQuality.values()) {
-                if (Objects.equals(quality.key, key))
+            for (AudioOptionQuality quality : AudioOptionQuality.values()) {
+                if (Objects.equals(quality.getKey(), key))
                     return quality;
             }
 
-            return AudioQuality.LOW;
+            return AudioOptionQuality.UNKNOWN;
         }
     }
 }

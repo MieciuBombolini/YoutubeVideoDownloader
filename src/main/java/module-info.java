@@ -18,4 +18,6 @@ module dev.bebomny.youtubevideodownloader {
 
     opens dev.bebomny.youtubevideodownloader to javafx.fxml;
     exports dev.bebomny.youtubevideodownloader;
+    exports dev.bebomny.youtubevideodownloader.clients;
+    opens dev.bebomny.youtubevideodownloader.clients to javafx.fxml;
 }

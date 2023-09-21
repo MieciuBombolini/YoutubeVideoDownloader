@@ -26,8 +26,23 @@ public interface StreamOption {
      */
     StreamType getType();
 
-    String getQualityText();
-    String getQualityKey();
+    default String getAudioQualityText() {
+        return "Unknown";
+    }
+    default String getAudioQualityKey() {
+        return "Unknown";
+    }
+
+    default String getVideoQualityText() {
+        return "Unknown";
+    }
+    default String getVideoQualityKey() {
+        return "Unknown";
+    }
+
+    default String getQualityLabel() {
+        return "tiny";
+    }
 
     int getITag();
 
@@ -37,7 +52,25 @@ public interface StreamOption {
 
     int getBitrate();
 
-    Quality getQuality();
+    default Quality getAudioQuality() {
+        return null;
+    }
+
+    default Quality getVideoQuality() {
+        return null;
+    }
+
+    default boolean isVideo() {
+        return false;
+    }
+
+    default boolean isAudio() {
+        return false;
+    }
+
+    default boolean isVideoAndAudio() {
+        return isVideo() && isAudio();
+    }
 
     default int getWidth() {
         return -1;
@@ -49,6 +82,18 @@ public interface StreamOption {
 
     default String getResolution() {
         return getWidth() >= 0 || getHeight() >= 0 ? getWidth() + "x" + getHeight() : "Unknown Resolution";
+    }
+
+    default int getFps() {
+        return -1;
+    }
+
+    default int getAudioSampleRate() {
+        return -1;
+    }
+
+    default int getAudioChannels() {
+        return -1;
     }
 
     default String getText() {

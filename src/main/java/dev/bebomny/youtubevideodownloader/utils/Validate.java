@@ -1,4 +1,4 @@
-package dev.bebomny.youtubevideodownloader.downloader.utils;
+package dev.bebomny.youtubevideodownloader.utils;
 
 public class Validate {
 

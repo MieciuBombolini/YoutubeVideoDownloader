@@ -3,8 +3,6 @@ package dev.bebomny.youtubevideodownloader.downloader.utils;
 import dev.bebomny.youtubevideodownloader.DataManager;
 import dev.bebomny.youtubevideodownloader.MainController;
 import dev.bebomny.youtubevideodownloader.YoutubeVideoDownloaderApplication;
-import dev.bebomny.youtubevideodownloader.download.StreamOption;
-import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

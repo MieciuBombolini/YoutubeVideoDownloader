@@ -1,7 +1,7 @@
 package dev.bebomny.youtubevideodownloader;
 
-import dev.bebomny.youtubevideodownloader.download.StreamOption;
-import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
+import dev.bebomny.youtubevideodownloader.download.YoutubeVideo;
+import dev.bebomny.youtubevideodownloader.download.stream.StreamOption;
 import javafx.scene.image.Image;
 
 public class DataManager {
@@ -23,6 +23,7 @@ public class DataManager {
         this.currentVideo = currentVideo;
         this.currentThumbnail = currentVideo.getBestQualityThumbnail();
         System.out.println("Thumbnail Resolution:" + currentThumbnail.getWidth() + "x" + currentThumbnail.getHeight());
+        System.out.println("Thumbnail URL: " + currentThumbnail.getUrl());
         this.thumbnailImage = new Image(currentThumbnail.getUrl(), true);
     }
 

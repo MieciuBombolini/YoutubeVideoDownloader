@@ -1,10 +1,11 @@
 package dev.bebomny.youtubevideodownloader.clients;
 
-import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
+import com.alibaba.fastjson.JSONObject;
+import dev.bebomny.youtubevideodownloader.download.YoutubeVideo;
 
 public class WebFetchingClient implements FetchingClient{
     @Override
-    public YoutubeVideo fetchVideoData(String url) {
+    public JSONObject fetchVideoData(String url) {
         return null;
     }
 

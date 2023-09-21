@@ -4,7 +4,7 @@ import dev.bebomny.youtubevideodownloader.download.StreamOption;
 import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
 import dev.bebomny.youtubevideodownloader.download.tag.ITagMap;
 import dev.bebomny.youtubevideodownloader.download.tag.StreamType;
-import dev.bebomny.youtubevideodownloader.downloader.utils.FileNameSanitizer;
+import dev.bebomny.youtubevideodownloader.utils.FileNameSanitizer;
 import dev.bebomny.youtubevideodownloader.downloader.utils.VideoDetailUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
