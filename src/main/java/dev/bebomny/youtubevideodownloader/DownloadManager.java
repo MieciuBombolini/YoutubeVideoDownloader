@@ -1,13 +1,12 @@
 package dev.bebomny.youtubevideodownloader;
 
-import dev.bebomny.youtubevideodownloader.animation.DownloadAnimation;
+//import dev.bebomny.youtubevideodownloader.animation.DownloadAnimation;
 import dev.bebomny.youtubevideodownloader.animation.FetchingAnimation;
 import dev.bebomny.youtubevideodownloader.clients.ClientManager;
 import dev.bebomny.youtubevideodownloader.clients.VideoDataFetcher;
 import dev.bebomny.youtubevideodownloader.download.YoutubeVideo;
 import dev.bebomny.youtubevideodownloader.download.status.FetchingStatus;
-import dev.bebomny.youtubevideodownloader.downloader.YoutubeDownloader;
-import dev.bebomny.youtubevideodownloader.downloader.stream.download.StreamDownloader;
+import dev.bebomny.youtubevideodownloader.download.stream.StreamOption;
 
 import java.io.File;
 import java.util.concurrent.CompletableFuture;
@@ -26,9 +25,9 @@ public class DownloadManager {
     public VideoDataFetcher videoDataFetcher;
 
     //Downloading
-    public StreamDownloader streamDownloader;
+    //public StreamDownloader streamDownloader;
     public Thread downloadThread;
-    public DownloadAnimation downloadAnimation;
+    //public DownloadAnimation downloadAnimation;
 
     public DownloadManager(YoutubeVideoDownloaderApplication application) {
         this.videoDownloaderApplication = application;
@@ -51,12 +50,12 @@ public class DownloadManager {
     }
 
     public void downloadVideo(StreamOption option, File target) {
-        downloadAnimation = new DownloadAnimation(videoDownloaderApplication);
+        //downloadAnimation = new DownloadAnimation(videoDownloaderApplication);
 
-        streamDownloader = new StreamDownloader(option, target, null);
-        downloadThread = new Thread(streamDownloader);
+        //streamDownloader = new StreamDownloader(option, target, null);
+        //downloadThread = new Thread(streamDownloader);
 
-        downloadAnimation.start();
-        downloadThread.start();
+        //downloadAnimation.start();
+        //downloadThread.start();
     }
 }

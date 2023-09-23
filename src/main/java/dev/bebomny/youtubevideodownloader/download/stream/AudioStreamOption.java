@@ -54,6 +54,11 @@ public class AudioStreamOption implements StreamOption{
     }
 
     @Override
+    public String getQualityLabel() {
+        return "tiny-" + streamType.getAudioQuality();
+    }
+
+    @Override
     public int getITag() {
         return iTag;
     }
@@ -94,6 +99,7 @@ public class AudioStreamOption implements StreamOption{
     }
 
     public enum AudioOptionQuality implements Quality {
+        ULTRALOW("AUDIO_QUALITY_ULTRALOW", "Ultra low"),
         LOW("AUDIO_QUALITY_LOW", "Low"),
         MEDIUM("AUDIO_QUALITY_MEDIUM", "Medium"),
         HIGH("AUDIO_QUALITY_HIGH", "High"),

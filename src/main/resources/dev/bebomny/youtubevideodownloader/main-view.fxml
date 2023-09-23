@@ -134,7 +134,7 @@
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownloadButtonClick" prefWidth="100.0" text="Download" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownloadButtonClick" prefWidth="100.0" text="Download" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <Label text="File Name" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
@@ -156,7 +156,9 @@
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Button fx:id="sampleButton" mnemonicParsing="false" onAction="#onSampleButtonClick" text="Sample" GridPane.rowIndex="4" />
+                              <Button fx:id="sampleButton" mnemonicParsing="false" onAction="#onSampleButtonClick" text="Sample" GridPane.rowIndex="5" />
+                              <MenuButton fx:id="saveAsMenuButton" mnemonicParsing="false" text="SaveAsMenuButton" GridPane.rowIndex="4" />
+                              <Label text="Save as" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
                            </children>
                         </GridPane>
                         <Label fx:id="informationLabel" text="InformationLabel" wrapText="true" VBox.vgrow="ALWAYS" />

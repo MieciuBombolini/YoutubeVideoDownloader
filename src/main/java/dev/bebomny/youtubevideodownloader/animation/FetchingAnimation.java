@@ -4,6 +4,8 @@ import dev.bebomny.youtubevideodownloader.DataManager;
 import dev.bebomny.youtubevideodownloader.DownloadManager;
 import dev.bebomny.youtubevideodownloader.MainController;
 import dev.bebomny.youtubevideodownloader.YoutubeVideoDownloaderApplication;
+import dev.bebomny.youtubevideodownloader.clients.VideoDataFetcher;
+import dev.bebomny.youtubevideodownloader.download.YoutubeVideo;
 import javafx.animation.AnimationTimer;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -14,6 +16,7 @@ public class FetchingAnimation extends AnimationTimer {
 
     private final YoutubeVideoDownloaderApplication application;
     private final DownloadManager downloadManager;
+    private final VideoDataFetcher videoDataFetcher;
     private final DataManager dataManager;
     private final MainController controller;
     private final Label statusLabel;
@@ -26,6 +29,7 @@ public class FetchingAnimation extends AnimationTimer {
     public FetchingAnimation(YoutubeVideoDownloaderApplication application) {
         this.application = application;
         this.downloadManager = application.getDownloadManager();
+        this.videoDataFetcher = downloadManager.videoDataFetcher;
         this.dataManager = application.getDataManager();
         this.controller = application.getMainController();
         this.statusLabel = controller.statusLabel;
@@ -38,7 +42,7 @@ public class FetchingAnimation extends AnimationTimer {
         long currentTime = System.currentTimeMillis();
 
         if(currentTime - lastUpdatedTime > delay) {
-            StringBuilder stringBuilder = new StringBuilder("Fetching");
+            StringBuilder stringBuilder = new StringBuilder(videoDataFetcher.getStatus().name().toLowerCase());
             if(dotAmount > maxDotAmount)
                 dotAmount = 0;
             stringBuilder.append(".".repeat(dotAmount++));

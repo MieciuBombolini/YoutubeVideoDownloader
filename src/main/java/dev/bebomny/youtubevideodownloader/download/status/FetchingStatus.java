@@ -6,5 +6,7 @@ public enum FetchingStatus implements Status{
     FETCHING,
     PARSING,
     COMPLETED,
+    PARSING_DETAILS,
+    PARSING_FORMATS,
     FAILURE
 }

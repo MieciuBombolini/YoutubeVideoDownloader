@@ -69,7 +69,7 @@ public class VideoDataFetcher {
             throw new FetchException("Data json fetching failed!", FetchException.Stage.CONNECTION);
 
         //Parsing data
-        status = FetchingStatus.PARSING;
+        status = FetchingStatus.PARSING_DETAILS;
 
         //Video details
         JSONObject videoDetails = jsonVideoData.getJSONObject(KEY_VIDEO_DETAILS);
@@ -87,6 +87,7 @@ public class VideoDataFetcher {
         thumbnailArray.forEach(o -> thumbnails.add((JSONObject) o));
 
         //Streaming data
+        status = FetchingStatus.PARSING_FORMATS;
         JSONObject streamingData = jsonVideoData.getJSONObject(KEY_STREAMING_DATA);
 
         int expiresInSeconds = streamingData.getIntValue(KEY_EXPIRES_IN_SECONDS);

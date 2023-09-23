@@ -1,11 +1,11 @@
 package dev.bebomny.youtubevideodownloader;
 
-import dev.bebomny.youtubevideodownloader.download.StreamOption;
-import dev.bebomny.youtubevideodownloader.downloader.stream.YoutubeVideo;
+import dev.bebomny.youtubevideodownloader.download.YoutubeVideo;
+import dev.bebomny.youtubevideodownloader.download.stream.StreamOption;
 import dev.bebomny.youtubevideodownloader.download.tag.ITagMap;
 import dev.bebomny.youtubevideodownloader.download.tag.StreamType;
 import dev.bebomny.youtubevideodownloader.utils.FileNameSanitizer;
-import dev.bebomny.youtubevideodownloader.downloader.utils.VideoDetailUtils;
+import dev.bebomny.youtubevideodownloader.utils.VideoDataUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -26,6 +26,7 @@ public class MainController {
     public TextField URLTextField;
     public TextField fileNameTextField;
     public TextField directoryTextField;
+    public MenuButton saveAsMenuButton;
     public Label statusLabel;
 
     //videoInfo
@@ -58,12 +59,12 @@ public class MainController {
     public Button sampleButton;
 
 
-
     @FXML
     public void initialize() {
         statusLabel.setText("");
         fileNameTextField.setText("downloadedVideo");
         directoryTextField.setText(System.getProperty("user.home") + File.separator +  "Downloads");
+        saveAsMenuButton.setText("None");
         tittleLabel.setText("Unknown");
         authorLabel.setText("Unknown");
         viewCountLabel.setText("Unknown");
@@ -139,48 +140,49 @@ public class MainController {
 
     public void onSampleButtonClick(ActionEvent actionEvent) {
 
-        YoutubeVideo video = YoutubeVideoDownloaderApplication.getInstance().dataManager.getCurrentVideo();
+        //YoutubeVideo video = YoutubeVideoDownloaderApplication.getInstance().dataManager.getCurrentVideo();
 
-        StreamOption option = video.getVideoStreamOptions().stream()
-                .filter(target -> target.getType().hasVideo() && target.getType().hasAudio())
-                .min(Comparator.comparingInt(o -> o.getType().getVideoQuality().ordinal())).orElse(null);
+        //StreamOption option = video.getVideoStreamOptions().stream()
+        //        .filter(target -> target.getType().hasVideo() && target.getType().hasAudio())
+        //        .min(Comparator.comparingInt(o -> o.getType().getVideoQuality().ordinal())).orElse(null);
 
-        if(option == null) {
-            System.out.println("Le null");
-            return;
-        }
+//        if(option == null) {
+//            System.out.println("Le null");
+//            return;
+//        }
 
-        System.out.println(option.getType().toString());
+//        System.out.println(option.getType().toString());
     }
 
     @FXML
     protected void onDownloadButtonClick() {
-        YoutubeVideoDownloaderApplication application = YoutubeVideoDownloaderApplication.getInstance();
-        DownloadManager downloadManager = application.getDownloadManager();
-        DataManager dataManager = application.getDataManager();
+        //TODO: check if all required info is correct - destination, target name, format, stream options, itp
+//        YoutubeVideoDownloaderApplication application = YoutubeVideoDownloaderApplication.getInstance();
+//        DownloadManager downloadManager = application.getDownloadManager();
+//        DataManager dataManager = application.getDataManager();
+//
+//        StreamOption option = dataManager.getChosenVideoOption();
+//
+//        File destination = new File(directoryTextField.getText());
+//        String fileName = FileNameSanitizer.sanitizeFileName(fileNameTextField.getText() + option.getType().getContainer().getFormat());
+//
+//        //File//start  here//
+//        File target = new File(destination, fileName);
+//        if(target.exists()) {
+//            int count = 1;
+//            do {
+//                String newFileName = FileNameSanitizer.sanitizeFileName(fileNameTextField.getText() + "("+ count +")" + option.getType().getContainer().getFormat());
+//                target = new File(destination, newFileName);
+//                count++;
+//            } while(target.exists());
+//        }
 
-        StreamOption option = dataManager.getChosenVideoOption();
 
-        File destination = new File(directoryTextField.getText());
-        String fileName = FileNameSanitizer.sanitizeFileName(fileNameTextField.getText() + option.getType().getContainer().getFormat());
-
-        //File//start  here//
-        File target = new File(destination, fileName);
-        if(target.exists()) {
-            int count = 1;
-            do {
-                String newFileName = FileNameSanitizer.sanitizeFileName(fileNameTextField.getText() + "("+ count +")" + option.getType().getContainer().getFormat());
-                target = new File(destination, newFileName);
-                count++;
-            } while(target.exists());
-        }
-
-
-        System.out.println("File Path: " + target.getAbsolutePath());
-
-        downloadManager.downloadVideo(option, target);
-
-        statusLabel.setText("Downloading");
+//        System.out.println("File Path: " + target.getAbsolutePath());
+//
+//        downloadManager.downloadVideo(option, target);
+//
+//        statusLabel.setText("Downloading");
     }
 
     public void updateDisplayedInfo() {
@@ -190,6 +192,7 @@ public class MainController {
         StreamOption currentAudioStreamOption = dataManager.getChosenAudioOption();
 
         //Set Defaults
+        saveAsMenuButton.setText("None");
 
         //disable button
         downloadButton.setDisable(true);
@@ -203,9 +206,11 @@ public class MainController {
         //Video quality menu
         videoQualityMenuButton.setText("Empty");
         videoQualityMenuButton.getItems().clear();
+        videoQualityMenuButton.setDisable(false);
         //Audio Quality Menu
         audioQualityMenuButton.setText("Empty");
         audioQualityMenuButton.getItems().clear();
+        audioQualityMenuButton.setDisable(false);
 
         //Video information label
         informationLabel.setText("");
@@ -221,24 +226,27 @@ public class MainController {
         formatNoteLabel.setText("Unknown");
 
         //////////////////////
+        if(currentVideo == null)
+            return;
 
-        if(currentVideo != null) {
-            tittleLabel.setText(currentVideo.getTitle());
-            authorLabel.setText(currentVideo.getAuthor().orElse("Author unfetchable"));
-            viewCountLabel.setText(VideoDetailUtils.getFormattedVideoViewCount(currentVideo.getViewCount()));
-            videoLengthLabel.setText(VideoDetailUtils.getFormattedVideoLength(currentVideo.getVideoLength()));
-            videoDescriptionLabel.setText(currentVideo.getShortDescription());
-            //thumbnailImageView.setFitWidth(dataManager.getCurrentThumbnail().getWidth());
-            //thumbnailImageView.setFitWidth(dataManager.getCurrentThumbnail().getHeight());
-            thumbnailImageView.setImage(dataManager.getThumbnailImage());
+        tittleLabel.setText(currentVideo.getTitle());
+        authorLabel.setText(currentVideo.getAuthor());
+        viewCountLabel.setText(VideoDataUtils.getFormattedVideoViewCount(currentVideo.getViewCount()));
+        videoLengthLabel.setText(VideoDataUtils.getFormattedVideoLength(currentVideo.getVideoLength()));
+        videoDescriptionLabel.setText(currentVideo.getShortDescription());
+        thumbnailImageView.setImage(dataManager.getThumbnailImage());
 
-            if(titleAsNameCheckBox.isSelected()) {
-                fileNameTextField.setText(FileNameSanitizer.sanitizeFileName(currentVideo.getTitle()));
-            }
-
-            videoQualityMenuButton.getItems().addAll(VideoDetailUtils.getVideoQualityMenuFromStreamOptions(currentVideo.getSortedVideoStreamOptions()));
-            audioQualityMenuButton.getItems().addAll(VideoDetailUtils.getAudioQualityMenuFromStreamOptions(currentVideo.getSortedAudioStreamOptions()));
+        if(titleAsNameCheckBox.isSelected()) {
+            fileNameTextField.setText(FileNameSanitizer.sanitizeFileName(currentVideo.getTitle()));
         }
+
+        videoQualityMenuButton.getItems().addAll(
+                VideoDataUtils.getVideoQualityMenuFromStreamOptions(
+                        currentVideo.getSortedVideoStreamOptions()));
+        audioQualityMenuButton.getItems().addAll(
+                VideoDataUtils.getAudioQualityMenuFromStreamOptions(
+                        currentVideo.getSortedAudioStreamOptions()));
+
 
         if(currentVideoStreamOption != null) {
             StreamType streamType = currentVideoStreamOption.getType();
@@ -250,7 +258,7 @@ public class MainController {
             videoQualityMenuButton.setText(currentVideoStreamOption.getText());
 
             //video
-
+            //TODO: handle empty video options, or filter them
             videoQualityLabel.setText(streamType.getVideoQuality().name());
             fpsLabel.setText(streamType.getFps().name());
             videoEncodingLabel.setText(streamType.getVideoEncoding().name());

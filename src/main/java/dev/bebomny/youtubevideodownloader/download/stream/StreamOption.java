@@ -1,12 +1,9 @@
 package dev.bebomny.youtubevideodownloader.download.stream;
 
-import dev.bebomny.youtubevideodownloader.download.tag.Encoding;
 import dev.bebomny.youtubevideodownloader.download.tag.StreamType;
+import javafx.scene.control.MenuItem;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public interface StreamOption {
 

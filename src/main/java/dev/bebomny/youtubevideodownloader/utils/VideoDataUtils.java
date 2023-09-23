@@ -1,6 +1,15 @@
 package dev.bebomny.youtubevideodownloader.utils;
 
+import dev.bebomny.youtubevideodownloader.DataManager;
+import dev.bebomny.youtubevideodownloader.MainController;
+import dev.bebomny.youtubevideodownloader.YoutubeVideoDownloaderApplication;
+import dev.bebomny.youtubevideodownloader.download.stream.EmptyStreamOption;
 import dev.bebomny.youtubevideodownloader.download.stream.StreamOption;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.MenuItem;
 
 import java.text.DecimalFormat;
 import java.util.Comparator;
@@ -22,6 +31,7 @@ public class VideoDataUtils {
 
     public static List<StreamOption> sortStreamOptions(List<StreamOption> options) {
         options.removeIf(Objects::isNull);
+        options.removeIf(streamOption -> streamOption instanceof EmptyStreamOption);
         options.sort(Comparator.comparing(StreamOption::getQualityValue).reversed());
         return options;
     }
@@ -45,5 +55,57 @@ public class VideoDataUtils {
 
         String formattedTime = hours == 0 ? minutes == 0 ? String.format("%02d", seconds) + "s" : String.format("%02d:%02d", minutes, seconds) + "m" : String.format("%02d:%02d:%02d", hours, minutes, seconds) + "h";
         return formattedTime;
+    }
+
+    public static ObservableList<MenuItem> getAudioQualityMenuFromStreamOptions(List<StreamOption> streamOptions) {
+        YoutubeVideoDownloaderApplication application = YoutubeVideoDownloaderApplication.getInstance();
+        MainController controller = application.getMainController();
+        DataManager dataManager = application.getDataManager();
+
+        ObservableList<MenuItem> itemList = FXCollections.observableArrayList();
+        for (StreamOption option : streamOptions) {
+            MenuItem optionItem = new MenuItem(option.getText());
+
+            optionItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    dataManager.setChosenAudioOption(option);
+                    controller.audioQualityMenuButton.setText(option.getText());
+                    controller.updateDisplayedInfo();
+                    controller.downloadButton.setDisable(false);
+                    System.out.println("URL: " + option.getUrl().toExternalForm());
+                }
+            });
+            itemList.add(optionItem);
+        }
+
+        return itemList;
+    }
+
+    public static ObservableList<MenuItem> getVideoQualityMenuFromStreamOptions(List<StreamOption> streamOptions) {
+        YoutubeVideoDownloaderApplication application = YoutubeVideoDownloaderApplication.getInstance();
+        MainController controller = application.getMainController();
+        DataManager dataManager = application.getDataManager();
+
+        ObservableList<MenuItem> itemList = FXCollections.observableArrayList();
+        for (StreamOption option : streamOptions) {
+            MenuItem optionItem = new MenuItem(option.getText());
+
+            optionItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    dataManager.setChosenVideoOption(option);
+                    if(option.isVideoAndAudio())
+                        dataManager.setChosenAudioOption(null);
+                    controller.videoQualityMenuButton.setText(option.getText());
+                    controller.updateDisplayedInfo();
+                    controller.downloadButton.setDisable(false);
+                    System.out.println("URL: " + option.getUrl().toExternalForm());
+                }
+            });
+            itemList.add(optionItem);
+        }
+
+        return itemList;
     }
 }
