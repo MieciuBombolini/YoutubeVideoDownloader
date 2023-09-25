@@ -7,7 +7,6 @@ import dev.bebomny.youtubevideodownloader.download.exception.FetchException;
 import dev.bebomny.youtubevideodownloader.download.status.FetchingStatus;
 import dev.bebomny.youtubevideodownloader.download.stream.StreamOption;
 import dev.bebomny.youtubevideodownloader.download.stream.StreamOptionFactory;
-import dev.bebomny.youtubevideodownloader.utils.Validate;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

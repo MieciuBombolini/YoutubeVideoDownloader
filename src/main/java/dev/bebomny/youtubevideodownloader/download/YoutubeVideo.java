@@ -160,6 +160,13 @@ public class YoutubeVideo {
             return width * height;
         }
 
+        public String getBestQualityUrl() {
+            if(getUrl().contains("sddefault.jpg"))
+                return getUrl().replace("sddefault.jpg", Thumbnail.BEST_QUALITY_KEY);
+
+            return getUrl();
+        }
+
         public static Thumbnail parseThumbnail(JSONObject json) {
             return new Thumbnail(json.getString("url"), json.getInteger("width"), json.getInteger("height"));
         }

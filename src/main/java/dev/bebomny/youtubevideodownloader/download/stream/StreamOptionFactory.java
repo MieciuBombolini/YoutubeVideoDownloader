@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import dev.bebomny.youtubevideodownloader.download.exception.FetchException;
 import dev.bebomny.youtubevideodownloader.download.tag.ITagMap;
 import dev.bebomny.youtubevideodownloader.download.tag.StreamType;
+import dev.bebomny.youtubevideodownloader.utils.DownloadUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -68,6 +69,8 @@ public class StreamOptionFactory {
                 System.out.println("Unknown stream, iTag: " + iTag);
                 if (iTag > 393 && iTag <= 399) System.out.println("Known unknown streams");; //Unknown streams.
                 System.err.println("Couldn't find the StreamType for the iTag " + iTag);
+
+                DownloadUtils.saveUnknownOptionToFile(format, stringUrl, iTag);
                 return new EmptyStreamOption(url, iTag);
             }
             System.out.println("streamType = " + streamType.toString());
@@ -212,7 +215,6 @@ public class StreamOptionFactory {
 
         //use empty for setting unknown
         streamOption = new EmptyStreamOption(url, iTag);
-
 
         return streamOption;
     }

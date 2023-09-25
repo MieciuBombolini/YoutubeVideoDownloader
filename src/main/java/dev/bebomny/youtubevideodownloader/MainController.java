@@ -1,9 +1,11 @@
 package dev.bebomny.youtubevideodownloader;
 
+import dev.bebomny.youtubevideodownloader.download.SaveFormat;
 import dev.bebomny.youtubevideodownloader.download.YoutubeVideo;
 import dev.bebomny.youtubevideodownloader.download.stream.StreamOption;
 import dev.bebomny.youtubevideodownloader.download.tag.ITagMap;
 import dev.bebomny.youtubevideodownloader.download.tag.StreamType;
+import dev.bebomny.youtubevideodownloader.utils.DownloadUtils;
 import dev.bebomny.youtubevideodownloader.utils.FileNameSanitizer;
 import dev.bebomny.youtubevideodownloader.utils.VideoDataUtils;
 import javafx.event.ActionEvent;
@@ -64,15 +66,16 @@ public class MainController {
         statusLabel.setText("");
         fileNameTextField.setText("downloadedVideo");
         directoryTextField.setText(System.getProperty("user.home") + File.separator +  "Downloads");
-        saveAsMenuButton.setText("None");
         tittleLabel.setText("Unknown");
         authorLabel.setText("Unknown");
         viewCountLabel.setText("Unknown");
         videoLengthLabel.setText("Unknown");
         videoDescriptionLabel.setText("Unknown");
+        saveAsMenuButton.setText(SaveFormat.MP4.getFormat());
+        saveAsMenuButton.getItems().addAll(DownloadUtils.createSaveAsFormatMenuItems());
 
         //Quality Tabs
-        videoQualityMenuButton.setText("Empty");
+        videoQualityMenuButton.setText("Video");
         videoQualityLabel.setText("Unknown");
         formatLabel.setText("Unknown");
         audioQualityLabel.setText("Unknown");
@@ -192,7 +195,9 @@ public class MainController {
         StreamOption currentAudioStreamOption = dataManager.getChosenAudioOption();
 
         //Set Defaults
-        saveAsMenuButton.setText("None");
+        saveAsMenuButton.getItems().clear();
+        saveAsMenuButton.setText(dataManager.getSaveAsFormat().getDisplayName());
+        saveAsMenuButton.getItems().addAll(DownloadUtils.createSaveAsFormatMenuItems());
 
         //disable button
         downloadButton.setDisable(true);
@@ -204,11 +209,11 @@ public class MainController {
 
         //Video details
         //Video quality menu
-        videoQualityMenuButton.setText("Empty");
+        videoQualityMenuButton.setText("Video");
         videoQualityMenuButton.getItems().clear();
         videoQualityMenuButton.setDisable(false);
         //Audio Quality Menu
-        audioQualityMenuButton.setText("Empty");
+        audioQualityMenuButton.setText("Audio");
         audioQualityMenuButton.getItems().clear();
         audioQualityMenuButton.setDisable(false);
 
@@ -258,7 +263,7 @@ public class MainController {
             videoQualityMenuButton.setText(currentVideoStreamOption.getText());
 
             //video
-            //TODO: handle empty video options, or filter them
+            //TODO: handle empty video options, or filter them, done?
             videoQualityLabel.setText(streamType.getVideoQuality().name());
             fpsLabel.setText(streamType.getFps().name());
             videoEncodingLabel.setText(streamType.getVideoEncoding().name());
