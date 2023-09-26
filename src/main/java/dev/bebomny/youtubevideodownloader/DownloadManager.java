@@ -59,7 +59,7 @@ public class DownloadManager {
         //Dispatch to another thread?- yeah
         //TODO: create the correct streamdownloader here and run it in a new thread try to merge the conversion and download into one
         // reconstruct the streamdownloader class
-        //Download
+        //Download/
 
         //Convert - dispatching a new thread in the download animation
     }
