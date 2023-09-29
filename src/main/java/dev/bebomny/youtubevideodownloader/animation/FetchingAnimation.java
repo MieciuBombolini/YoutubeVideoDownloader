@@ -8,7 +8,6 @@ import dev.bebomny.youtubevideodownloader.clients.VideoDataFetcher;
 import dev.bebomny.youtubevideodownloader.download.YoutubeVideo;
 import javafx.animation.AnimationTimer;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 
 import java.util.concurrent.ExecutionException;
 
@@ -26,10 +25,10 @@ public class FetchingAnimation extends AnimationTimer {
     private final int delay = 100;
     private long lastUpdatedTime = 0;
 
-    public FetchingAnimation(YoutubeVideoDownloaderApplication application) {
+    public FetchingAnimation(YoutubeVideoDownloaderApplication application, VideoDataFetcher videoDataFetcher) {
         this.application = application;
         this.downloadManager = application.getDownloadManager();
-        this.videoDataFetcher = downloadManager.videoDataFetcher;
+        this.videoDataFetcher = videoDataFetcher;
         this.dataManager = application.getDataManager();
         this.controller = application.getMainController();
         this.statusLabel = controller.statusLabel;
@@ -77,25 +76,5 @@ public class FetchingAnimation extends AnimationTimer {
         //controller.statusLabel.setText("Video Data Acquired");
         statusLabel.setText("Video Data Acquired");
         this.stop();
-    }
-
-
-    private Integer extractQuality(MenuItem menuItem) {
-        String text = menuItem.getText();
-
-        if(text.startsWith("p")) {
-            //video and fps values
-            int videoValue = 4 * Integer.parseInt(text.substring(1, text.indexOf('f')));
-            int fpsValue = 2 * Integer.parseInt(text.substring(text.indexOf('f') + 1, text.indexOf('f') + 3));
-            int formatValue = text.contains("mp4") ? 50 : 0;
-
-            //adding a 1000 so video qualities always appear above audio
-            int qualityValue = 1000 + videoValue + fpsValue + formatValue;
-            return -qualityValue;
-        } else if(text.startsWith("k")) {
-            int audioValue = Integer.parseInt(text.substring(1, text.indexOf('.')));
-            return -audioValue;
-        }
-        return Integer.MAX_VALUE;
     }
 }

@@ -45,7 +45,9 @@ public interface StreamOption {
 
     int getDurationMs();
 
-    long getContentLength();
+    default long getContentLength() {
+        return -1;
+    };
 
     int getBitrate();
 
@@ -67,6 +69,10 @@ public interface StreamOption {
 
     default boolean isVideoAndAudio() {
         return isVideo() && isAudio();
+    }
+
+    default String getAudioOrVideoAsString() {
+        return isVideoAndAudio() ? "dual" : isAudio() ? "audio" : isVideo() ? "video" : "Unknown";
     }
 
     default int getWidth() {

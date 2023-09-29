@@ -5,6 +5,7 @@ import dev.bebomny.youtubevideodownloader.MainController;
 import dev.bebomny.youtubevideodownloader.YoutubeVideoDownloaderApplication;
 import dev.bebomny.youtubevideodownloader.download.stream.EmptyStreamOption;
 import dev.bebomny.youtubevideodownloader.download.stream.StreamOption;
+import dev.bebomny.youtubevideodownloader.download.tag.Encoding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -62,6 +63,11 @@ public class VideoDataUtils {
         MainController controller = application.getMainController();
         DataManager dataManager = application.getDataManager();
 
+        //For testing purposes TODO: remove later
+        //streamOptions.removeIf(option -> !option.getType().getAudioEncoding().equals(Encoding.AAC));
+        //streamOptions.removeIf(option -> !option.isVideoAndAudio());
+        //
+
         ObservableList<MenuItem> itemList = FXCollections.observableArrayList();
         for (StreamOption option : streamOptions) {
             MenuItem optionItem = new MenuItem(option.getText());
@@ -86,6 +92,11 @@ public class VideoDataUtils {
         YoutubeVideoDownloaderApplication application = YoutubeVideoDownloaderApplication.getInstance();
         MainController controller = application.getMainController();
         DataManager dataManager = application.getDataManager();
+
+        //For testing purposes TODO: remove later
+        //streamOptions.removeIf(option -> !option.getType().getVideoEncoding().equals(Encoding.H264));
+        //streamOptions.removeIf(option -> !option.isVideoAndAudio());
+        //
 
         ObservableList<MenuItem> itemList = FXCollections.observableArrayList();
         for (StreamOption option : streamOptions) {

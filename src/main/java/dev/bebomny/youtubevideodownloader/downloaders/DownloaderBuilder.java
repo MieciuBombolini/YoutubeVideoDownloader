@@ -6,22 +6,31 @@ import dev.bebomny.youtubevideodownloader.utils.DownloadUtils;
 import java.io.File;
 
 public class DownloaderBuilder {
-    private StreamOption streamOption; //contentLength can be -1! check for it!
+    private StreamOption audioOption; //contentLength can be -1! check for it!
+    private StreamOption videoOption;
     private File destination;
-    private boolean fragmented;
-    private boolean isVideo;
-    private boolean isAudio;
+    private File tempFolder;
+    //private boolean fragmented;
 
     public DownloaderBuilder() {
-        this.streamOption = null;
-        this.destination = DownloadUtils.realTempFolder;
-        this.fragmented = false;
-        this.isAudio = false;
-        this.isVideo = false;
+        this.audioOption = null;
+        this.videoOption = null;
+        this.destination = DownloadUtils.tempFolder;
+        this.tempFolder = DownloadUtils.tempFolder;
+        //this.fragmented = false;
     }
 
-    public DownloaderBuilder option(StreamOption option) {
-        this.streamOption = option;
+    public static DownloaderBuilder builder() {
+        return new DownloaderBuilder();
+    }
+
+    public DownloaderBuilder withAudio(StreamOption audio) {
+        this.audioOption = audio;
+        return this;
+    }
+
+    public DownloaderBuilder withVideo(StreamOption video) {
+        this.videoOption = video;
         return this;
     }
 
@@ -30,28 +39,18 @@ public class DownloaderBuilder {
         return this;
     }
 
-    public DownloaderBuilder type(boolean audio, boolean video) {
-        audio(audio);
-        video(video);
+    public DownloaderBuilder tempStorage(File tempLocation) {
+        this.tempFolder = tempLocation;
         return this;
     }
 
-    public DownloaderBuilder audio(boolean isAudio) {
-        this.isAudio = isAudio;
-        return this;
-    }
-
-    public DownloaderBuilder video(boolean isVideo) {
-        this.isVideo = isVideo;
-        return this;
-    }
-
-    public DownloaderBuilder inFragments(boolean fragmented) {
-        this.fragmented = fragmented;
-        return this;
-    }
+//    public DownloaderBuilder inFragments(boolean fragmented) {
+//        this.fragmented = fragmented;
+//        return this;
+//    }
 
     public Downloader build() {
-        return new DefaultDownloader(streamOption, destination); //Placeholder!!!
+
+        return new DefaultDownloader(audioOption, videoOption, tempFolder); //Placeholder!!!
     }
 }

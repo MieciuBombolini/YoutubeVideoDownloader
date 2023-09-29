@@ -4,6 +4,8 @@ import dev.bebomny.youtubevideodownloader.DataManager;
 import dev.bebomny.youtubevideodownloader.DownloadManager;
 import dev.bebomny.youtubevideodownloader.MainController;
 import dev.bebomny.youtubevideodownloader.YoutubeVideoDownloaderApplication;
+import dev.bebomny.youtubevideodownloader.downloaders.DownloadHandler;
+import dev.bebomny.youtubevideodownloader.utils.DownloadUtils;
 import javafx.animation.AnimationTimer;
 import javafx.scene.control.Label;
 
@@ -11,8 +13,9 @@ import javafx.scene.control.Label;
 public class DownloadAnimation extends AnimationTimer {
 
     private final YoutubeVideoDownloaderApplication application;
-    private final DownloadManager downloadManager;
-    private final DataManager dataManager;
+    //private final DownloadManager downloadManager;
+    private final DownloadHandler downloadHandler;
+    //private final DataManager dataManager;
     private final MainController controller;
     private final Label statusLabel;
     private final Label downloadSpeedLabel;
@@ -22,10 +25,11 @@ public class DownloadAnimation extends AnimationTimer {
     private final int delay = 100;
     private long lastUpdatedTime = 0;
 
-    public DownloadAnimation(YoutubeVideoDownloaderApplication application) {
+    public DownloadAnimation(YoutubeVideoDownloaderApplication application, DownloadHandler downloadHandler) {
         this.application = application;
-        this.downloadManager = application.getDownloadManager();
-        this.dataManager = application.getDataManager();
+        //this.downloadManager = application.getDownloadManager();
+        this.downloadHandler = downloadHandler;
+        //this.dataManager = application.getDataManager();
         this.controller = application.getMainController();
         this.statusLabel = controller.statusLabel;
         this.downloadSpeedLabel = controller.downloadSpeedLabel;
@@ -39,30 +43,24 @@ public class DownloadAnimation extends AnimationTimer {
         long currentTime = System.currentTimeMillis();
 
         if(currentTime - lastUpdatedTime > delay) {
-            StringBuilder stringBuilder = new StringBuilder("Downloading");
+            StringBuilder stringBuilder = new StringBuilder(downloadHandler.getStatus().name().toLowerCase());
             if(dotAmount > maxDotAmount)
                 dotAmount = 0;
             stringBuilder.append(".".repeat(dotAmount++));
             String fetchStatusString = stringBuilder.toString();
             statusLabel.setText(fetchStatusString);
-            String downloadSpeed = String.format("%.3g", downloadManager.streamDownloader.getDownloadSpeed()) + "MBps";
+            String downloadSpeed = DownloadUtils.getFormatedDownloadSpeed(downloadHandler.getDownloadSpeed());
             downloadSpeedLabel.setText(downloadSpeed);
 
             lastUpdatedTime = System.currentTimeMillis();
         }
         /////////////////////
 
-        if(!downloadManager.streamDownloader.isDownloadAndConversionFinished())
+        if(!downloadHandler.isFinished())
             return;
 
-        //controller.statusLabel.setText("Video Data Acquired");
+
         statusLabel.setText("Video Downloaded Successfully");
         this.stop();
-
-
-        //TODO: FIX!
-        //String downloadSpeedString = String.format("%.3g", controller.downloadNotifier.getDownloadSpeedKbps()) + "Kbps";
-        //controller.downloadSpeedLabel.setText(downloadSpeedString);
-
     }
 }

@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public enum SaveFormat {
 
+    FLV("FLV", ".flv"),
+    GP3("GP3", ".gp3"),
+    M4A("M4A", ".m4a"),
     MP4("MP4", ".mp4"),
     MP3("MP3", ".mp3"),
     WEBM("WEBM", ".webm"),
@@ -29,7 +32,7 @@ public enum SaveFormat {
         return format;
     }
 
-    public SaveFormat getSaveFormatByName(String name) {
+    public static SaveFormat getSaveFormatByName(String name) {
         if(name == null)
             return SaveFormat.MP4; //default to mp4
 
@@ -44,7 +47,7 @@ public enum SaveFormat {
         return SaveFormat.MP4; //default to mp4
     }
 
-    public SaveFormat getSaveFormatByFormat(String f) {
+    public static SaveFormat getSaveFormatByFormat(String f) {
         if(f == null)
             return SaveFormat.MP4; //default to mp4
 

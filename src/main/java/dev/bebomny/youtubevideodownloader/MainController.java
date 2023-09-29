@@ -186,6 +186,40 @@ public class MainController {
 //        downloadManager.downloadVideo(option, target);
 //
 //        statusLabel.setText("Downloading");
+
+        YoutubeVideoDownloaderApplication application = YoutubeVideoDownloaderApplication.getInstance();
+        DownloadManager downloadManager = application.getDownloadManager();
+        DataManager dataManager = application.getDataManager();
+
+        StreamOption videoOption = dataManager.getChosenVideoOption();
+        StreamOption audioOption = dataManager.getChosenAudioOption();
+
+        if(videoOption == null && audioOption == null) {
+            statusLabel.setText("Select at least one quality option!");
+            return;
+        }
+
+        //TODO: add support for custom formats and conversion to those instead
+        File destination = new File(directoryTextField.getText());
+        String format = videoOption == null ? audioOption.getType().getContainer().getFormat() : videoOption.getType().getContainer().getFormat();
+        String fileName = FileNameSanitizer.sanitizeFileName(fileNameTextField.getText() + format);
+
+        File target = new File(destination, fileName);
+        if(target.exists()) {
+            int count = 1;
+            do {
+                fileName = FileNameSanitizer.sanitizeFileName(fileNameTextField.getText() + "("+ count +")" + format);
+                target = new File(destination, fileName);
+                count++;
+            } while(target.exists());
+        }
+
+        fileName = DownloadUtils.removeFileNameFormat(fileName);
+
+        System.out.println("File Path: " + target.getAbsolutePath());
+
+        //TODO: add support for custom formats v2
+        downloadManager.downloadVideo(videoOption, audioOption, destination, fileName, null);
     }
 
     public void updateDisplayedInfo() {
